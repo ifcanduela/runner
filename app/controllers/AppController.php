@@ -13,7 +13,7 @@ CODE;
 
 class AppController extends \pew\Controller
 {
-    public function index()
+    public function index($packages)
     {
         $this->view->template("index");
 
@@ -37,7 +37,7 @@ class AppController extends \pew\Controller
             'code' => $code,
             'output' => $output,
             'snippets' => $snippets,
-            'json' => $this->getComposerPackages(),
+            'packages' => $packages,
         ];
     }
 
@@ -61,7 +61,7 @@ class AppController extends \pew\Controller
     /**
      * Install a Composer package.
      */
-    public function install()
+    public function install($packages)
     {
         $package = $this->request->post("packageName");
         chdir(root());
@@ -71,11 +71,11 @@ class AppController extends \pew\Controller
         $this->view->layout(false);
 
         return [
-            "packages" => $this->getComposerPackages()->packages,
+            "packages" => $packages,
         ];
     }
 
-    public function uninstall()
+    public function uninstall($packages)
     {
         $package = $this->request->post("packageName");
         chdir(root());
@@ -85,7 +85,7 @@ class AppController extends \pew\Controller
         $this->view->layout(false);
 
         return [
-            "packages" => $this->getComposerPackages()->packages,
+            "packages" => $packages,
         ];
     }
 
@@ -131,16 +131,5 @@ class AppController extends \pew\Controller
         }
 
         return $this->renderJson($exists);
-    }
-
-    /**
-     * Get a list of Composer packages currently available.
-     * 
-     * @return array
-     */
-    private function getComposerPackages()
-    {
-        $composer_lock = root("composer.lock");
-        return json_decode(file_get_contents($composer_lock));
     }
 }

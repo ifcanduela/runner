@@ -35,7 +35,7 @@ $this->layout(false);
                         <a href="#install" class="menu-btn" id="install">Install package...</a>
 
                         <div id="package-list">
-                            <?= $this->insert("packages", ["packages" => $json->packages]) ?>
+                            <?= $this->insert("packages", ["packages" => $packages]) ?>
                         </div>
                     </div>
                 </div>
