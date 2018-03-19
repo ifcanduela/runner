@@ -2,30 +2,33 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-function diff($a, $b) {
-    $diff = [];
-    
-    foreach ($a as $item) {
-        $found = array_search($item, $b);
-        
-        if ($found === false) {
-            $diff[] = $item;
-        }
-    }
-    
-    foreach ($b as $item) {
-        $found = array_search($item, $a);
-        
-        if ($found === false) {
-            $diff[] = $item;
-        }
-    }
-    
-    return $diff;
+use Stringy\Stringy;
+use Doctrine\Common\Inflector\Inflector;
+use Webmozart\Assert\Assert;
+
+$broken = Stringy::create("Daniël from Curaçao: অসমীয়া লিপি বাংলা লিপি <== Nagari script");
+
+echo $broken . PHP_EOL;
+echo $broken->slugify() . PHP_EOL;
+
+echo PHP_EOL;
+
+echo "Plural of 'wolf': " . Inflector::pluralize("wolf") . PHP_EOL;
+echo "Singular of 'people': " . Inflector::singularize("people") . PHP_EOL;
+
+echo PHP_EOL;
+
+$collection = new \pew\model\Collection(range(1, 10));
+$collection = $collection->map(function ($number) {
+    return $number + (mt_rand(0, 100) - 25) / 10000;
+});
+
+foreach ($collection as $i) {
+    echo "{$i}  ===> " . M_PI * $i . PHP_EOL;
 }
 
-$a = [1, 2, 3, 4, 5, 6];
-$b = [4, 5, 6, 7];
+echo PHP_EOL;
 
-print_r(array_diff($a, $b));
-print_r(diff($a, $b));
+$faker = \Faker\Factory::create();
+
+echo $faker->name;

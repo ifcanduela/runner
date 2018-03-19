@@ -3,8 +3,8 @@ let last_loaded_snippet;
 
 function editor_setup(id) {
     const e = ace.edit(id);
-    let code_on_load = $("#initial-code").val();
     const local_storage_code = localStorage.getItem("pewRunner.code");
+    let code_on_load = $("#initial-code").val();
 
     if (local_storage_code !== null) {
         code_on_load = local_storage_code;
@@ -26,7 +26,7 @@ function editor_setup(id) {
         }
     });
 
-    return editor;
+    return e;
 }
 
 function editor_focus() {
@@ -140,7 +140,6 @@ $("#package-list").on("click", "a.uninstall", function (e) {
     return false;
 });
 
-// const editor = editor_setup_ace("ace-wrapper");
 const editor = editor_setup("ace-wrapper");
 
 editor_focus();
