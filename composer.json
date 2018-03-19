@@ -1,0 +1,22 @@
+{
+    "name": "ifcanduela/pew-app",
+    "description": "Pew-Pew-Pew starter application",
+    "authors": [
+        {
+            "name": "Igor F. Canduela",
+            "email": "ifcanduela@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "ifcanduela/pew": "*",
+        "ifcanduela/abbrev": "^1.0",
+        "doctrine/inflector": "^1.2",
+        "fzaninotto/faker": "^1.7"
+    },
+    "autoload": {
+        "psr-0": {
+            "app": ""
+        }
+    }
+}

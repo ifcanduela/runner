@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One');
+
+@primary: #ce3;
+@secondary: #389;
+
+@breakpoint: 860px;
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    font-family: sans-serif;
+
+    @media screen and (max-width: @breakpoint) {
+        flex-direction: column;
+    }
+
+    .panel {
+        flex: 1 0 50%;
+
+        @media screen and (max-width: @breakpoint) {
+            min-height: 50vh !important;
+            max-height: 50vh !important;
+        }
+    }
+}
+
+#input {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .logo {
+        // font-weight: bold;
+        display: block;
+        flex: 0 0 auto;
+        font-size: 32px;
+        font-family: "Alfa Slab One";
+
+        span {
+            display: inline-block;
+            background-color: #ce3;
+            color: #fff;
+            padding: 5px;
+            line-height: 1;
+            margin-right: 10px;
+            font-size: 27px;
+            position: relative;
+            top: -5px;
+            width: 35px;
+            height: 35px;
+            text-align: center;
+        }
+    }
+
+    #initial-code {
+        display: block;
+        height: 0;
+        font-family: consolas, monospace;
+        font-size: 16px;
+        padding: 0;
+        border: 0 none;
+        outline: none;
+        resize: none;
+    }
+
+    .code {
+        flex: 1;
+        font-size: 15px;
+    }
+
+    .submit-wrapper {
+        display: none;
+    }
+
+    #ace-wrapper {
+        border: 1px solid #eee;
+        border-width: 1px 0;
+    }
+
+    .help {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 12px;
+        opacity: 0.7;
+        padding: 10px;
+        cursor: pointer;
+    }
+}
+
+#output {
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    font-family: consolas, monospace;
+    position: relative;
+    overflow-y: auto;
+    max-height: 100vh;
+
+    .output-line {
+        display: flex;
+        white-space: pre-wrap;
+    }
+
+    .output-line-number {
+        flex: 0 0 50px;
+        text-align: right;
+        opacity: 0.25;
+    }
+
+    .output-line-code {
+        padding-left: 10px;
+    }
+}
+
+.header {
+    padding: 15px;
+    padding-bottom: 0;
+    display: flex;
+
+    menu {
+        display: flex;
+    }
+}
+
+.main-menu-item {
+    position: relative;
+    margin-right: 20px;
+
+    > a {
+        text-transform: uppercase;
+        font-weight: bold;
+        color: @secondary;
+        text-decoration: none;
+    }
+
+    .dropdown {
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+        display: none;
+        position: absolute;
+        left: -5px;
+        top: 100%;
+        background-color: #fff;
+        padding: 5px 0 0;
+        z-index: 100;
+
+        .snippet,
+        .package {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        a {
+            text-decoration: none;
+            display: block;
+            padding: 5px 10px;
+            white-space: nowrap;
+            color: @secondary;
+
+            &:hover {
+                // background-color: fade(@secondary, 15%);
+                background-color: fade(@primary, 50%);
+            }
+
+            &.delete,
+            &.uninstall {
+                color: #f93;
+            }
+
+            &.menu-btn {
+                padding-top: 15px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid fade(@secondary, 30%);
+            }
+        }
+
+        .load {
+            flex: 1;
+        }
+
+        code {
+            opacity: 0.6;
+        }
+    }
+
+    &:hover > .dropdown {
+        display: block;
+    }
+}
+
+#overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+    z-index: 9999;
+
+    &.hidden {
+        display: none;
+    }
+}
+
+#loading {
+    width: 100px;
+    height: 100px;
+    border: 4px solid @primary;
+    border-color: @primary transparent;
+    border-radius: 1000px;
+    animation: rot 2s infinite;
+}
+
+@keyframes rot {
+    0%   { transform: rotate(0deg); }
+    50%  { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
+}
