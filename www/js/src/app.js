@@ -11,7 +11,7 @@ function editor_setup(id) {
     }
 
     e.session.setMode("ace/mode/php");
-    e.setTheme("ace/theme/clouds");
+    e.setTheme("ace/theme/pew");
     e.setValue(code_on_load);
 
     e.setOptions({
